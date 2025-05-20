@@ -1,4 +1,12 @@
 from djitellopy import Tello
+
+import os
+from pathlib import Path
+# 添加YOLOv7路径到系统路径
+yolov7_path = Path("../yolov7")  # 替换为你的实际路径
+import sys
+sys.path.append(str(yolov7_path))
+
 import cv2
 import time
 from yolo.detector import YoloDetector
@@ -50,7 +58,6 @@ try:
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
 
         # 显示
-        cv2.imshow("Tello - Person Detection", frame)
 
         # 写入视频
         out.write(frame)
