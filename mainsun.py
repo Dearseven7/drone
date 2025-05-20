@@ -19,7 +19,7 @@ print(f"[INFO] 电池电量: {tello.get_battery()}%")
 tello.streamon()
 
 # 初始化 YOLO 检测器
-detector = YoloDetector("yolo/yolov7-tiny.pt")
+detector = YoloDetector("yolov7/yolov7-tiny.pt")
 
 # 设置视频写入器（MP4 格式）
 timestamp = time.strftime("%Y%m%d_%H%M%S")
