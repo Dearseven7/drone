@@ -1,4 +1,13 @@
 from djitellopy import Tello
+
+import os
+from pathlib import Path
+
+#增加yolov7到python路径
+yolov7_path = Path("yolov7")  # 替换为你的实际路径
+import sys
+sys.path.append(str(yolov7_path))
+
 import cv2
 import time
 from yolo.detector import YoloDetector
@@ -10,7 +19,7 @@ print(f"[INFO] 电池电量: {tello.get_battery()}%")
 tello.streamon()
 
 # 初始化 YOLO 检测器
-detector = YoloDetector("yolo/yolov7-tiny.pt")
+detector = YoloDetector("yolov7/yolov7-tiny.pt")
 
 # 设置视频写入器（MP4 格式）
 timestamp = time.strftime("%Y%m%d_%H%M%S")
@@ -50,7 +59,6 @@ try:
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
 
         # 显示
-        cv2.imshow("Tello - Person Detection", frame)
 
         # 写入视频
         out.write(frame)
