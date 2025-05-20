@@ -2,7 +2,7 @@ from djitellopy import Tello
 
 import os
 from pathlib import Path
-# 添加YOLOv7路径到系统路径
+
 yolov7_path = Path("yolov7")  # 替换为你的实际路径
 import sys
 sys.path.append(str(yolov7_path))
