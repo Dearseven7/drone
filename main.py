@@ -44,7 +44,7 @@ class PIDController:
 
 def main():
     # 初始化 Tello
-    print("[STATUS] 正在连接Tello的无人机...")
+    print("[STATUS] 正在连接DJITello的无人机...")
     tello = Tello()
 
     try:
