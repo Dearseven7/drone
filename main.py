@@ -57,6 +57,8 @@ last_time = time.time()
 print("[INFO] 正在检测人体，按 'q' 键退出")
 
 try:
+    yaw_speed = 0
+    throttle_speed = 0
     while True:
         current_time = time.time()
         dt = current_time - last_time
