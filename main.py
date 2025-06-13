@@ -5,7 +5,7 @@ import sys
 import cv2
 import time
 import numpy as np
-
+import sys
 # 增加yolov7到Python路径
 yolov7_path = Path("yolov7")
 sys.path.append(str(yolov7_path))
@@ -73,9 +73,9 @@ def main():
         frame_count = 0
 
         # PID控制器初始化
-        pid_yaw = PIDController(Kp=0.25, Ki=0.0, Kd=0.001, max_output=50, setpoint=320)  # 偏航控制
-        pid_ud = PIDController(Kp=0.25, Ki=0.0, Kd=0.001, max_output=50, setpoint=240)   # 上下控制
-        pid_fb = PIDController(Kp=0.001, Ki=0.0, Kd=0.0002, max_output=50, setpoint=50000)  # 前后控制
+        pid_yaw = PIDController(Kp=0.2, Ki=0.01, Kd=0.001, max_output=50, setpoint=320)  # 偏航控制
+        pid_ud = PIDController(Kp=0.2, Ki=0.01, Kd=0.001, max_output=50, setpoint=240)   # 上下控制
+        pid_fb = PIDController(Kp=0.002, Ki=0.0, Kd=0.0002, max_output=50, setpoint=50000)  # 前后控制
         
         last_time = time.time()
         last_print_time = time.time()
@@ -134,12 +134,12 @@ def main():
                 x1, y1, x2, y2 = selected_person["box"]
                 current_x = (x1 + x2) // 2
                 current_y = (y1 + y2) // 2
-                area = (x2 - x1) * (y2 - y1)
-
+                current_area = (x2 - x1) * (y2 - y1)
+                targety=y2 - (y2 - y1) * 0.575
                 # 计算控制量
                 yaw_speed = -int(pid_yaw.compute(current_x))  # 偏航控制
-                ud_speed = int(pid_ud.compute(current_y))   # 上下控制（注意方向）
-                fb_speed = int(pid_fb.compute(area))         # 前后控制
+                ud_speed = int(pid_ud.compute(targety))   # 上下控制（注意方向）
+                fb_speed = int(pid_fb.compute(current_area))         # 前后控制
 
                 # 发送控制指令
                 tello.send_rc_control(
@@ -216,6 +216,6 @@ def main():
             print(f"[SUCCESS] 视频保存成功: {video_filename}")
 
         print("[STATUS] 程序安全退出")
-
+        sys.exit(0)
 if __name__ == "__main__":
     main()
