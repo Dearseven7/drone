@@ -77,4 +77,4 @@ The video stream displays:
 - Check battery level before flight (>50% recommended)
 - Adjust PID parameters in code for different lighting/conditions
 
-> **Note**: Always maintain visual line of sight with drone during operation and follow local drone regulations.
+> **Note**: Always keep the drone within your line of sight during operation and ensure safe flying practices.
