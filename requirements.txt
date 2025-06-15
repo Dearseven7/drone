@@ -5,3 +5,4 @@ djitellopy
 matplotlib
 scipy
 tqdm
+mediapipe
